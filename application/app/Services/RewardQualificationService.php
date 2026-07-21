@@ -43,6 +43,28 @@ class RewardQualificationService
     }
 
     /**
+     * Public progress snapshot for the Reward Achievement page.
+     */
+    public function getMemberProgress($member_id)
+    {
+        $member = User::find($member_id);
+
+        if ($member == null) {
+            return [
+                'directs' => 0,
+                'team_members' => 0,
+                'self_business' => 0,
+                'team_business' => 0,
+                'leg1_business' => 0,
+                'leg2_business' => 0,
+                'leg3_business' => 0,
+            ];
+        }
+
+        return $this->buildMemberMetrics($member, app(DashboardController::class));
+    }
+
+    /**
      * Collect qualification metrics using existing project helpers / fields.
      */
     protected function buildMemberMetrics(User $member, DashboardController $dashboardCon)
