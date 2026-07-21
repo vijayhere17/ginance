@@ -1,5 +1,34 @@
 <?php
 
+// Level Income ("ROI to ROI") percentages by level band
+$level_income_ladder = [
+    1 => 10,
+    2 => 5,
+    3 => 5,
+    4 => 4,
+    5 => 4,
+    6 => 3,
+    7 => 3,
+    8 => 2,
+    9 => 2,
+];
+
+foreach (range(10, 20) as $level) {
+    $level_income_ladder[$level] = 1;
+}
+
+foreach (range(21, 50) as $level) {
+    $level_income_ladder[$level] = 0.50;
+}
+
+foreach (range(51, 100) as $level) {
+    $level_income_ladder[$level] = 0.25;
+}
+
+foreach (range(101, 200) as $level) {
+    $level_income_ladder[$level] = 0.10;
+}
+
 return [
 
     // Direct Sponsor Income - % of investment amount, level => percent
@@ -10,27 +39,19 @@ return [
     ],
 
     // Level Income ("ROI to ROI") - % of each daily ROI payout, level => percent
-    'level_income_ladder' => [
-        1 => 15,
-        2 => 10,
-        3 => 5,
-        4 => 3,
-        5 => 2,
-        6 => 1,
-        7 => 1,
-        8 => 1,
-        9 => 1,
-        10 => 1,
-        11 => 0.5,
-        12 => 0.5,
-        13 => 0.5,
-        14 => 0.5,
-        15 => 0.5,
-        16 => 0.5,
-        17 => 0.5,
-        18 => 0.5,
-        19 => 0.5,
-        20 => 0.5,
+    'level_income_ladder' => $level_income_ladder,
+
+    // Max upline depth for Level Income payouts
+    'level_income_max_depth' => 200,
+
+    // Active-direct requirements by level band (inclusive).
+    // required_directs = 'level' means the member needs that many active directs equal to the level number.
+    'level_income_qualification' => [
+        ['from' => 1,   'to' => 9,   'required_directs' => 'level'],
+        ['from' => 10,  'to' => 20,  'required_directs' => 5],
+        ['from' => 21,  'to' => 50,  'required_directs' => 10],
+        ['from' => 51,  'to' => 100, 'required_directs' => 15],
+        ['from' => 101, 'to' => 200, 'required_directs' => 20],
     ],
 
     // Booster Income - directs sponsored within 48hrs of own activation => extra daily ROI percent

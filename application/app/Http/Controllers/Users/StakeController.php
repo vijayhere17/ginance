@@ -862,6 +862,8 @@ $roiService->createInvestment($log->id);
         {
             $ladder = config('income.level_income_ladder');
             $per = $ladder[$level] ?? 0;
+            $max_depth = (int) config('income.level_income_max_depth', 200);
+            $required_directs = $this->getLevelIncomeRequiredDirects($level);
 
             $direct = User::where('referral_id','=',$member_id)->where('kit_id','>',0)->count();
            
@@ -872,7 +874,7 @@ $roiService->createInvestment($log->id);
             
             if($member->kit_id > 0)
             {
-                if($direct >= $level || $member->level >= $level)
+                if($direct >= $required_directs || $member->level >= $level)
                 {
                     $description = 'Level '.$level.' Incentive From '.$from_address;
                     
@@ -889,11 +891,32 @@ $roiService->createInvestment($log->id);
             
             $level++;
 
-            if($member->referral_id > 0 && $level <= 20)
+            if($member->referral_id > 0 && $level <= $max_depth)
             {
                 $this->processlevelcommission($member->referral_id, $level, $amount, $from_id, $kit_id, $created_at);
             }
         }
+    }
+
+    /**
+     * Resolve required active directs for a Level Income level from config bands.
+     */
+    protected function getLevelIncomeRequiredDirects($level)
+    {
+        $bands = config('income.level_income_qualification', []);
+
+        foreach ($bands as $band) {
+            $from = (int) ($band['from'] ?? 0);
+            $to = (int) ($band['to'] ?? 0);
+
+            if ($level >= $from && $level <= $to) {
+                $required = $band['required_directs'] ?? 'level';
+
+                return ($required === 'level') ? (int) $level : (int) $required;
+            }
+        }
+
+        return (int) $level;
     }
 
     //
