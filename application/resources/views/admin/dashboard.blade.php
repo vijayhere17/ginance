@@ -125,6 +125,13 @@
 			<h3>Generated Return</h3>
 		</div>
 	</div>
+	<div class="col-sm-3">
+		<div class="tile-stats tile-blue">
+			<div class="icon"><i class="entypo-users"></i></div>
+			<div class="num" data-start="0" data-end="{{ $locked_reward_unlock }}" data-postfix="" data-duration="1500" data-delay="0" onClick="#" style="cursor:pointer;">{{ $locked_reward_unlock }}</div>
+			<h3>Locked Reward Unlock ($)</h3>
+		</div>
+	</div>
 </div> 
 
 <div class="row">

@@ -330,6 +330,63 @@
             </div>
         </div>
 
+        <!-- [ Locked Reward Bonus ] -->
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="avtar avtar-s bg-light-warning">
+                                <svg class="pc-icon"><use xlink:href="#custom-dollar-square"></use></svg>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="mb-0">Locked Reward Bonus</h6>
+                            </div>
+                        </div>
+                        <div class="bg-body p-3 mt-3 rounded">
+                            <h3 class="mb-1">${{ $object->locked_reward_bonus }}</h3>
+                            <p class="text-muted mb-2">
+                                Expiry:
+                                @if(!empty($object->reward_expiry_date))
+                                    {{ date('d/m/Y', strtotime($object->reward_expiry_date)) }}
+                                @else
+                                    —
+                                @endif
+                            </p>
+                            <p class="mb-0 text-primary">Remaining Days: {{ $object->reward_remaining_days }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="avtar avtar-s bg-light-success">
+                                <svg class="pc-icon"><use xlink:href="#custom-wallet-2"></use></svg>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="mb-0">Unlocked Reward Bonus</h6>
+                            </div>
+                        </div>
+                        <div class="bg-body p-3 mt-3 rounded">
+                            <h3 class="mb-1">${{ $object->unlocked_reward_bonus }}</h3>
+                            <p class="text-muted mb-2">Progress</p>
+                            @php
+                                $gt_unlock_pct = ((float)$object->locked_reward_total > 0)
+                                    ? min(100, round(((float)$object->unlocked_reward_bonus / (float)$object->locked_reward_total) * 100, 1))
+                                    : 0;
+                            @endphp
+                            <div class="progress mb-2" style="height: 8px;">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ $gt_unlock_pct }}%;" aria-valuenow="{{ $gt_unlock_pct }}" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <p class="mb-0 text-primary">Unlocked {{ $object->unlocked_reward_bonus }} / {{ $object->locked_reward_total }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- [ Bonus Summary / Achievement Progress / Rank Progress ] -->
         <div class="row">
             <div class="col-md-6 col-xxl-4 mb-4">
@@ -362,6 +419,10 @@
                             <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
                                 <span class="text-muted">Turnover Bonus</span>
                                 <span>{{ $object->total_turnover_bonus }}</span>
+                            </li>
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
+                                <span class="text-muted">Locked Reward Unlock</span>
+                                <span>{{ $object->total_locked_reward_unlock }}</span>
                             </li>
                         </ul>
                     </div>

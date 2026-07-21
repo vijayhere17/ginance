@@ -343,6 +343,7 @@ class StakeController extends Controller
         }
 
         $member = User::where('id','=',$member_id)->first();
+        $isFirstActivation = ($member != null && $member->activation_date == null);
         
         if($member != null)
         {
@@ -353,6 +354,12 @@ class StakeController extends Controller
             }
             $member->self_investment = ($member->self_investment+$amount);
             $member->save();
+
+            // Locked Reward Bonus: allocate $1000 once on first package activation.
+            if($isFirstActivation)
+            {
+                app(\App\Services\LockedRewardBonusService::class)->allocateOnFirstActivation($member);
+            }
         }
 
         // Add Purchased Kit Log
@@ -376,9 +383,12 @@ $roiService->createInvestment($log->id);
                 $refer->save();
             }  
 
-            if($refer->kit_id > 0)
+            if($refer != null && $refer->kit_id > 0)
             {
                 self::processreferralcommission($refer->id, 1, $amount, $member->id, $kit->id, date("Y-m-d H:i:s"));
+
+                // Unlock 10% of this activation for the direct sponsor's Locked Reward Bonus.
+                app(\App\Services\LockedRewardBonusService::class)->unlockForDirectSponsor($refer, $amount, $log, $member->username);
             }
         }
     }
@@ -536,6 +546,7 @@ $roiService->createInvestment($log->id);
         //
 
         $member = User::where('id','=',$member_id)->first();
+        $isFirstActivation = ($member != null && $member->activation_date == null);
         
         if($member != null)
         {
@@ -549,6 +560,12 @@ $roiService->createInvestment($log->id);
             $member->self_investment = ($member->self_investment+$amount);
             
             $member->save();
+
+            // Locked Reward Bonus: allocate $1000 once on first package activation.
+            if($isFirstActivation && $topup_type == 0)
+            {
+                app(\App\Services\LockedRewardBonusService::class)->allocateOnFirstActivation($member);
+            }
         }
 
         // Add Purchased Kit Log
@@ -573,9 +590,12 @@ $roiService->createInvestment($log->id);
                     $refer->save();
                 }  
                             
-                if($refer->kit_id > 0)
+                if($refer != null && $refer->kit_id > 0)
                 {
                     self::processreferralcommission($refer->id, 1, $amount, $member->id, $kit_id, date("Y-m-d H:i:s"));
+
+                    // Unlock 10% of this activation for the direct sponsor's Locked Reward Bonus.
+                    app(\App\Services\LockedRewardBonusService::class)->unlockForDirectSponsor($refer, $amount, $log, $member->username);
                 }
             }    
         }
@@ -862,6 +882,8 @@ $roiService->createInvestment($log->id);
         {
             $ladder = config('income.level_income_ladder');
             $per = $ladder[$level] ?? 0;
+            $max_depth = (int) config('income.level_income_max_depth', 200);
+            $required_directs = $this->getLevelIncomeRequiredDirects($level);
 
             $direct = User::where('referral_id','=',$member_id)->where('kit_id','>',0)->count();
            
@@ -872,7 +894,7 @@ $roiService->createInvestment($log->id);
             
             if($member->kit_id > 0)
             {
-                if($direct >= $level || $member->level >= $level)
+                if($direct >= $required_directs || $member->level >= $level)
                 {
                     $description = 'Level '.$level.' Incentive From '.$from_address;
                     
@@ -889,11 +911,32 @@ $roiService->createInvestment($log->id);
             
             $level++;
 
-            if($member->referral_id > 0 && $level <= 20)
+            if($member->referral_id > 0 && $level <= $max_depth)
             {
                 $this->processlevelcommission($member->referral_id, $level, $amount, $from_id, $kit_id, $created_at);
             }
         }
+    }
+
+    /**
+     * Resolve required active directs for a Level Income level from config bands.
+     */
+    protected function getLevelIncomeRequiredDirects($level)
+    {
+        $bands = config('income.level_income_qualification', []);
+
+        foreach ($bands as $band) {
+            $from = (int) ($band['from'] ?? 0);
+            $to = (int) ($band['to'] ?? 0);
+
+            if ($level >= $from && $level <= $to) {
+                $required = $band['required_directs'] ?? 'level';
+
+                return ($required === 'level') ? (int) $level : (int) $required;
+            }
+        }
+
+        return (int) $level;
     }
 
     //
