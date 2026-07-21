@@ -206,6 +206,32 @@
   --bs-card-bg: var(--gt-card-bg);
 }
 
+/* Kill Bootstrap white list-group defaults on dark theme */
+.list-group {
+  --bs-list-group-color: var(--gt-text);
+  --bs-list-group-bg: transparent;
+  --bs-list-group-border-color: var(--gt-border);
+  --bs-list-group-action-color: var(--gt-text);
+  --bs-list-group-action-hover-color: var(--gt-heading);
+  --bs-list-group-action-hover-bg: rgba(212, 175, 55, 0.08);
+  --bs-list-group-action-active-color: var(--gt-heading);
+  --bs-list-group-action-active-bg: rgba(212, 175, 55, 0.12);
+  --bs-list-group-disabled-color: var(--gt-text-muted);
+  --bs-list-group-disabled-bg: transparent;
+}
+.list-group-item {
+  color: var(--gt-text);
+  background-color: transparent;
+  border-color: var(--gt-border);
+}
+.list-group-flush > .list-group-item {
+  background-color: transparent;
+}
+.bg-body {
+  background-color: var(--gt-bg-elevated) !important;
+  color: var(--gt-text);
+}
+
 .table {
   --bs-table-color: var(--gt-text);
   --bs-table-bg: transparent;

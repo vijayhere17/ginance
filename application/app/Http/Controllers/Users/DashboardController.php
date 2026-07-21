@@ -59,10 +59,13 @@ class DashboardController extends Controller
         
         $object->total_referral_bonus = formatdecimal($balanceCon->getearningsum($user_id, 1), 4);
         $object->total_daily_roi_bonus = formatdecimal($balanceCon->getearningsum($user_id, 2), 4);
-        $object->total_daily_level_bonus = formatdecimal($balanceCon->getearningsum($user_id, 3), 4);
-        $object->total_team_level_bonus = formatdecimal($balanceCon->getearningsum($user_id, 4), 4);
+        $object->total_cashback_bonus = formatdecimal($balanceCon->getearningsum($user_id, 3), 4);
+        $object->total_level_income_bonus = formatdecimal($balanceCon->getearningsum($user_id, 4), 4); // ROI ki ROI
+        $object->total_team_level_bonus = $object->total_level_income_bonus; // alias for older blades
+        $object->total_daily_level_bonus = $object->total_level_income_bonus; // alias
         $object->total_salary_bonus = formatdecimal($balanceCon->getearningsum($user_id, 5), 4);
-        $object->total_turnover_bonus = formatdecimal($balanceCon->getearningsum($user_id, 6), 4);
+        $object->total_turnover_bonus = formatdecimal($balanceCon->getearningsum($user_id, 7), 4);
+        $object->total_booster_bonus = formatdecimal($balanceCon->getearningsum($user_id, 8), 4);
         $object->total_locked_reward_unlock = formatdecimal(
             $balanceCon->getearningsum($user_id, (int) config('income.locked_reward_earning_type', 10)),
             4

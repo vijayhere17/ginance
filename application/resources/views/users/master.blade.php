@@ -204,6 +204,11 @@
                         </a>
                         <ul class="pc-submenu">
                             <li class="pc-item"><a class="pc-link" href="{{ URL::to('/') }}/earning/1/Referral Incentive">Referral Incentive</a></li>
+                            <li class="pc-item"><a class="pc-link" href="{{ URL::to('/') }}/earning/2/Daily ROI">Daily ROI</a></li>
+                            <li class="pc-item"><a class="pc-link" href="{{ URL::to('/') }}/earning/4/Level Income">Level Income (ROI ki ROI)</a></li>
+                            <li class="pc-item"><a class="pc-link" href="{{ URL::to('/') }}/earning/5/Salary Bonus">Salary Bonus</a></li>
+                            <li class="pc-item"><a class="pc-link" href="{{ URL::to('/') }}/earning/7/Turnover Reward">Turnover Reward</a></li>
+                            <li class="pc-item"><a class="pc-link" href="{{ URL::to('/') }}/earning/8/Booster Income">Booster Income</a></li>
                             <li class="pc-item"><a class="pc-link" href="{{ URL::to('/') }}/earning/{{ (int) config('income.locked_reward_earning_type', 10) }}/Locked Reward Unlock">Locked Reward Unlock</a></li>
                         </ul>
                     </li>
