@@ -154,10 +154,20 @@
         flex-shrink: 0;
     }
 
+    .pc-content .list-group {
+        --bs-list-group-bg: transparent;
+        --bs-list-group-color: var(--gt-text);
+        --bs-list-group-border-color: var(--gt-border);
+        background: transparent !important;
+    }
     .pc-content .list-group-item {
         padding-top: 8px;
         padding-bottom: 8px;
         font-size: 0.8rem;
+        background: transparent !important;
+        background-color: transparent !important;
+        color: var(--gt-heading);
+        border-color: var(--gt-border) !important;
     }
     .pc-content .list-group-item > span:last-child,
     .pc-content .list-group-item > div + span {
@@ -165,20 +175,37 @@
         max-width: 60%;
         text-align: right;
         word-break: break-word;
+        color: var(--gt-heading);
     }
-    .pc-content .list-group-item .text-muted { font-size: 0.72rem; }
+    .pc-content .list-group-item .text-muted { font-size: 0.72rem; color: var(--gt-text-muted) !important; }
 
+    .pc-content .bg-body,
     .pc-content .bg-body.rounded {
         padding: 12px !important;
         border: 1px solid var(--gt-border);
+        background: rgba(255, 255, 255, 0.03) !important;
+        color: var(--gt-text);
     }
-    .pc-content .bg-body.rounded h4 { font-size: 0.95rem; margin-bottom: 2px; word-break: break-all; }
+    .pc-content .bg-body.rounded h4,
+    .pc-content .bg-body.rounded h3 { font-size: 0.95rem; margin-bottom: 2px; word-break: break-all; color: var(--gt-heading); }
     .pc-content .bg-body.rounded p {
         font-size: 0.62rem;
         text-transform: uppercase;
         letter-spacing: 0.08em;
         font-weight: 600;
     }
+
+    .gt-dash-panel {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--gt-border);
+        border-radius: 10px;
+        padding: 12px 14px;
+    }
+    .gt-income-link {
+        color: var(--gt-heading);
+        text-decoration: none;
+    }
+    .gt-income-link:hover { color: var(--gt-gold-1); }
 
     .gt-mini-stats {
         display: grid;
@@ -346,7 +373,7 @@
                                 <h6 class="mb-0 gt-card-title">Wallet Balance</h6>
                             </div>
                         </div>
-                        <div class="bg-body p-3 mt-3 rounded">
+                        <div class="gt-dash-panel mt-3">
                             <div class="row align-items-center">
                                 <div class="col-6">
                                     <h4 class="mb-0">Earning Wallet</h4>
@@ -356,7 +383,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-body p-3 mt-2 rounded">    
+                        <div class="gt-dash-panel mt-2">    
                             <div class="row align-items-center">
                                 <div class="col-6">
                                     <h4 class="mb-0">Total Income</h4>
@@ -366,7 +393,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-body p-3 mt-2 rounded">       
+                        <div class="gt-dash-panel mt-2">       
                             <div class="row align-items-center">
                                 <div class="col-6">
                                     <h4 class="mb-0">Remaining Income</h4>
@@ -443,7 +470,7 @@
                                 <h6 class="mb-0 gt-card-title">Direct Team</h6>
                             </div>
                         </div>
-                        <div class="bg-body p-3 mt-3 rounded">
+                        <div class="gt-dash-panel mt-3">
                             <div class="row align-items-center text-center">
                                 <div class="col-4">
                                     <h4 class="mb-0">{{ $object->total_referral }}</h4>
@@ -474,7 +501,7 @@
                                 <h6 class="mb-0 gt-card-title">Total Team</h6>
                             </div>
                         </div>
-                        <div class="bg-body p-3 mt-3 rounded">
+                        <div class="gt-dash-panel mt-3">
                             <div class="row align-items-center text-center">
                                 <div class="col-4">
                                     <h4 class="mb-0">{{ $object->total_team }}</h4>
@@ -494,8 +521,8 @@
                 </div>
             </div>
 
-            <div class="col-md-6 col-xxl-4">
-                <div class="card">
+            <div class="col-md-6 col-xxl-4 mb-4">
+                <div class="card h-100">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
                             <div class="flex-shrink-0">
@@ -508,11 +535,11 @@
                                 </div>
                             </div>
                             <div class="flex-grow-1 ms-3">
-                                <h6 class="mb-0">My Business</h6>
+                                <h6 class="mb-0 gt-card-title">My Business</h6>
                             </div>
                         </div>
-                        <div class="bg-body p-3 mt-3 rounded">
-                            <div class="mt-3 row align-items-center">
+                        <div class="gt-dash-panel mt-3">
+                            <div class="row align-items-center">
                                 <div class="col-12 text-end">
                                     <h3 class="mb-1">${{ $object->total_t_investment }}</h3>
                                     <p class="text-primary mb-0">Total Downline</p>
@@ -532,32 +559,61 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="col-md-6 col-lg-4">
-                <div class="card bg-grey available-balance-card" style="background-color: rgb(22 166 181) !important;">
-                    <div class="card-body p-3">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <div>
-                                <p class="mb-0 text-white text-opacity-75">Coin Price</p>
-                                <h4 class="mb-0 text-white">${{ getcoinrate() }}</h4>
-                            </div>
-                            <div class="avtar">
-                                <img src="{{ URL::to('/') }}/assets/images/logo-lg.png" alt="user-image" class="user-avtar wid-35" />
-                            </div>
+
+            <div class="col-md-6 col-xxl-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <h5 class="mb-0 gt-card-title">Income Summary</h5>
+                            <a href="{{ URL::to('/') }}/earning-wallet" class="link-primary f-12">All History</a>
                         </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
+                                <a class="gt-income-link" href="{{ URL::to('/') }}/earning/1/Referral Incentive">Referral Incentive</a>
+                                <span>{{ $object->total_referral_bonus }}</span>
+                            </li>
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
+                                <a class="gt-income-link" href="{{ URL::to('/') }}/earning/2/Daily ROI">Daily ROI</a>
+                                <span>{{ $object->total_daily_roi_bonus }}</span>
+                            </li>
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
+                                <a class="gt-income-link" href="{{ URL::to('/') }}/earning/4/Level Income">Level Income (ROI ki ROI)</a>
+                                <span>{{ $object->total_level_income_bonus }}</span>
+                            </li>
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
+                                <a class="gt-income-link" href="{{ URL::to('/') }}/earning/5/Salary Bonus">Salary Bonus</a>
+                                <span>{{ $object->total_salary_bonus }}</span>
+                            </li>
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
+                                <a class="gt-income-link" href="{{ URL::to('/') }}/earning/8/Booster Income">Booster Income</a>
+                                <span>{{ $object->total_booster_bonus }}</span>
+                            </li>
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
+                                <a class="gt-income-link" href="{{ URL::to('/') }}/earning/{{ (int) config('income.locked_reward_earning_type', 10) }}/Locked Reward Unlock">Locked Reward Unlock</a>
+                                <span>{{ $object->total_locked_reward_unlock }}</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
+            </div>
             
-                <div class="card bg-primary available-balance-card">
-                    <div class="card-body p-3">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <div>
-                                <p class="mb-0 text-white text-opacity-75">Total Withdrawal</p>
-                                <h4 class="mb-0 text-white">{{ $object->total_withdrawal }}</h4>
-                            </div>
-                            <div class="avtar">
+            <div class="col-md-6 col-xxl-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="avtar avtar-s bg-light-primary">
                                 <i class="ti ti-arrows-left-right f-18"></i>
                             </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="mb-0 gt-card-title">Total Withdrawal</h6>
+                            </div>
+                        </div>
+                        <div class="gt-dash-panel mt-3">
+                            <h3 class="mb-1">{{ $object->total_withdrawal }}</h3>
+                            <p class="text-primary mb-0">Approved Withdrawals</p>
+                        </div>
+                        <div class="d-grid mt-3">
+                            <a href="{{ URL::to('/') }}/new-withdrawal" class="btn btn-primary btn-sm">Withdraw Now</a>
                         </div>
                     </div>
                 </div>
@@ -577,7 +633,7 @@
                                 <h6 class="mb-0 gt-card-title">Locked Reward Bonus</h6>
                             </div>
                         </div>
-                        <div class="bg-body p-3 mt-3 rounded">
+                        <div class="gt-dash-panel mt-3">
                             <h3 class="mb-1">${{ $object->locked_reward_bonus }}</h3>
                             <p class="text-muted mb-2">
                                 Expiry:
@@ -603,7 +659,7 @@
                                 <h6 class="mb-0 gt-card-title">Unlocked Reward Bonus</h6>
                             </div>
                         </div>
-                        <div class="bg-body p-3 mt-3 rounded">
+                        <div class="gt-dash-panel mt-3">
                             <h3 class="mb-1">${{ $object->unlocked_reward_bonus }}</h3>
                             <p class="text-muted mb-2">Progress</p>
                             @php
@@ -631,7 +687,7 @@
                     <div class="card-body table-border-style">
                         <div class="row g-3 mt-0">
                             <div class="col-sm-4">
-                                <div class="bg-body p-3 rounded">
+                                <div class="gt-dash-panel">
                                     <div class="d-flex align-items-center mb-2">
                                         <div class="flex-shrink-0">
                                             <span class="p-1 d-block bg-primary rounded-circle">
@@ -646,7 +702,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-4">
-                                <div class="bg-body p-3 rounded">
+                                <div class="gt-dash-panel">
                                     <div class="d-flex align-items-center mb-2">
                                         <div class="flex-shrink-0">
                                             <span class="p-1 d-block bg-warning rounded-circle">
@@ -662,7 +718,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-4">
-                                <div class="bg-body p-3 rounded">
+                                <div class="gt-dash-panel">
                                     <div class="d-flex align-items-center mb-2">
                                         <div class="flex-shrink-0">
                                             <span class="p-1 d-block bg-success rounded-circle">
