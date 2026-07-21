@@ -40,7 +40,8 @@ class SignupController extends Controller
 
     public function signup(){
         $page_titel = 'Sign Up';
-        return view('users.sign-up', compact('page_titel'));
+        $registration_amount = config('income.registration_amount', 1);
+        return view('users.sign-up', compact('page_titel', 'registration_amount'));
     }
 
     public function getMemberById($id){

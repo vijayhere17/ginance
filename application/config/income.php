@@ -63,11 +63,22 @@ return [
     'capital_withdrawal_charge_percent' => 30,
     'capital_withdrawal_window_months' => 8,
 
+    // Registration fee (signup only - does not affect package activation amounts)
+    'registration_amount' => 1,
+
+    // Locked Reward Bonus (allocated once on first package activation)
+    'locked_reward_bonus_amount' => 1000,
+    'locked_reward_unlock_percent' => 10,
+    'locked_reward_validity_days' => 30,
+    // New earning_type for unlocked locked-reward credits (full amount, no charges)
+    'locked_reward_earning_type' => 10,
+
     // Set to true to re-enable the legacy rank-based Salary cron (runSalaryAchiever/runSalaryEarning).
     // Left in place, not deleted, per business decision to replace Salary with Turnover Reward income.
     'legacy_salary_enabled' => false,
 
     // earning_type allocations used across the app (documentation only, not read programmatically)
     // 1 = Direct Sponsor Income, 2 = Daily ROI, 3 = Cashback, 4 = Level Income,
-    // 5 = Legacy Salary (dormant), 6 = DMC Leadership, 7 = Turnover Reward, 8 = Booster Income, 9 = Life Time Reward
+    // 5 = Legacy Salary (dormant), 6 = DMC Leadership, 7 = Turnover Reward, 8 = Booster Income, 9 = Life Time Reward,
+    // 10 = Locked Reward Unlock
 ];

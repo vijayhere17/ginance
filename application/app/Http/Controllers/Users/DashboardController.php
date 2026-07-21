@@ -62,6 +62,25 @@ class DashboardController extends Controller
         $object->total_team_level_bonus = formatdecimal($balanceCon->getearningsum($user_id, 4), 4);
         $object->total_salary_bonus = formatdecimal($balanceCon->getearningsum($user_id, 5), 4);
         $object->total_turnover_bonus = formatdecimal($balanceCon->getearningsum($user_id, 6), 4);
+        $object->total_locked_reward_unlock = formatdecimal(
+            $balanceCon->getearningsum($user_id, (int) config('income.locked_reward_earning_type', 10)),
+            4
+        );
+
+        // Locked Reward Bonus summary
+        $user = Auth::user();
+        $locked_total = (float) config('income.locked_reward_bonus_amount', 1000);
+        $object->locked_reward_bonus = formatdecimal((float) ($user->locked_reward_bonus ?? 0), 2);
+        $object->unlocked_reward_bonus = formatdecimal((float) ($user->unlocked_reward_bonus ?? 0), 2);
+        $object->expired_reward_bonus = formatdecimal((float) ($user->expired_reward_bonus ?? 0), 2);
+        $object->reward_lock_date = $user->reward_lock_date;
+        $object->reward_expiry_date = $user->reward_expiry_date;
+        $object->locked_reward_total = formatdecimal($locked_total, 2);
+        $object->reward_remaining_days = 0;
+        if (!empty($user->reward_expiry_date)) {
+            $diff = (int) ceil((strtotime($user->reward_expiry_date) - time()) / 86400);
+            $object->reward_remaining_days = max(0, $diff);
+        }
 
         $object->total_income_today = formatdecimal(EarningWallet::where('member_id', $user_id)->where('txn_type', 1)->whereDate('created_at', today())->sum('amount'), 4);
         $object->recent_earning = EarningWallet::where('member_id', $user_id)->where('txn_type', 1)->orderBy('created_at', 'desc')->take(5)->get();

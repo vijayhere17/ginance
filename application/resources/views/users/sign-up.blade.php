@@ -157,6 +157,7 @@
                         </div>
 
                         <h4 class="text-center f-w-500 mb-3">Create new account</h4>
+                        <p class="text-center text-muted mb-3">Registration Amount: <strong>${{ number_format((float)$registration_amount, 2) }}</strong></p>
 
                         <div class="row">
                             <div class="col-sm-12">

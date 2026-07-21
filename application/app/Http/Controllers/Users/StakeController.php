@@ -343,6 +343,7 @@ class StakeController extends Controller
         }
 
         $member = User::where('id','=',$member_id)->first();
+        $isFirstActivation = ($member != null && $member->activation_date == null);
         
         if($member != null)
         {
@@ -353,6 +354,12 @@ class StakeController extends Controller
             }
             $member->self_investment = ($member->self_investment+$amount);
             $member->save();
+
+            // Locked Reward Bonus: allocate $1000 once on first package activation.
+            if($isFirstActivation)
+            {
+                app(\App\Services\LockedRewardBonusService::class)->allocateOnFirstActivation($member);
+            }
         }
 
         // Add Purchased Kit Log
@@ -376,9 +383,12 @@ $roiService->createInvestment($log->id);
                 $refer->save();
             }  
 
-            if($refer->kit_id > 0)
+            if($refer != null && $refer->kit_id > 0)
             {
                 self::processreferralcommission($refer->id, 1, $amount, $member->id, $kit->id, date("Y-m-d H:i:s"));
+
+                // Unlock 10% of this activation for the direct sponsor's Locked Reward Bonus.
+                app(\App\Services\LockedRewardBonusService::class)->unlockForDirectSponsor($refer, $amount, $log, $member->username);
             }
         }
     }
@@ -536,6 +546,7 @@ $roiService->createInvestment($log->id);
         //
 
         $member = User::where('id','=',$member_id)->first();
+        $isFirstActivation = ($member != null && $member->activation_date == null);
         
         if($member != null)
         {
@@ -549,6 +560,12 @@ $roiService->createInvestment($log->id);
             $member->self_investment = ($member->self_investment+$amount);
             
             $member->save();
+
+            // Locked Reward Bonus: allocate $1000 once on first package activation.
+            if($isFirstActivation && $topup_type == 0)
+            {
+                app(\App\Services\LockedRewardBonusService::class)->allocateOnFirstActivation($member);
+            }
         }
 
         // Add Purchased Kit Log
@@ -573,9 +590,12 @@ $roiService->createInvestment($log->id);
                     $refer->save();
                 }  
                             
-                if($refer->kit_id > 0)
+                if($refer != null && $refer->kit_id > 0)
                 {
                     self::processreferralcommission($refer->id, 1, $amount, $member->id, $kit_id, date("Y-m-d H:i:s"));
+
+                    // Unlock 10% of this activation for the direct sponsor's Locked Reward Bonus.
+                    app(\App\Services\LockedRewardBonusService::class)->unlockForDirectSponsor($refer, $amount, $log, $member->username);
                 }
             }    
         }
