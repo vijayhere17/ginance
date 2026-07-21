@@ -15,6 +15,11 @@ class UserStaked extends Model
 	{
 		return $this->belongsTo(User::class, 'member_id');
 	}
+
+	public function kit()
+	{
+		return $this->belongsTo(StakeMaster::class, 'kit_id');
+	}
 }
 
 ?>

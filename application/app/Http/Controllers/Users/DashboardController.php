@@ -46,6 +46,7 @@ class DashboardController extends Controller
 		$object->total_t_investment = Auth::user()->team_investment; // self::getTeamBusiness($user_id, 0);
 		
 		$object->total_self_investment = UserStaked::where('member_id', '=', $user_id)->sum('payable_coin');
+		$object->list_self_investment = UserStaked::where('member_id', '=', $user_id)->with('kit')->orderBy('id', 'desc')->get();
 	    
 	    $object->total_flush = formatdecimal(($balanceCon->getearningflush($user_id, 1)),4);
 		$object->total_earning = formatdecimal(($balanceCon->getcraditdebitsum($user_id, 1)),4);
