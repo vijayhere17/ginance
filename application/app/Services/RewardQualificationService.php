@@ -12,7 +12,7 @@ class RewardQualificationService
 {
     /**
      * Evaluate and mark reward achievements for all active members.
-     * Qualification only - no wallet credit / weekly salary payout.
+     * Qualification only - weekly salary payout is handled by SalaryController::runRewardSalaryEarning.
      */
     public function run()
     {
@@ -152,6 +152,8 @@ class RewardQualificationService
             $achiever->leg3_business = $metrics['leg3_business'];
             $achiever->weekly_salary = $requirements['weekly_salary'];
             $achiever->achieve_date = date('Y-m-d H:i:s');
+            // Same schedule pattern as salary_achiever: first payout due after 7 days.
+            $achiever->return_date = date('Y-m-d', strtotime(date('Y-m-d'). ' + 7 days'));
             $achiever->save();
 
             DB::commit();

@@ -22,6 +22,7 @@ class RewardAchiever extends Model
 		'leg3_business',
 		'weekly_salary',
 		'achieve_date',
+		'return_date',
 	];
 
 	public function member()

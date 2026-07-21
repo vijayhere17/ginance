@@ -16,6 +16,7 @@ use App\Models\BinaryPoints;
 
 use App\Models\SalaryMaster;
 use App\Models\SalaryAchiever;
+use App\Models\RewardAchiever;
 
 use Log;
 use DB;
@@ -176,6 +177,54 @@ class SalaryController extends Controller
             else
             {
                 $walletCon->addearningwalletlog($log->member_id, 3, $earning_type, $description, $commission, 0, 0, date("Y-m-d H:i:s")); 
+            }
+        }
+    }
+
+    /**
+     * Weekly Reward Salary - reuses the same wallet / cap pattern as runSalaryEarning.
+     * Pays reward_achiever.weekly_salary for the member's highest achieved reward only.
+     * Duplicate prevention via return_date (same field pattern as salary_achiever).
+     */
+    public function runRewardSalaryEarning()
+    {
+        $walletCon = app('App\Http\Controllers\Users\EarningWalletController');
+        $dashboardCon = app('App\Http\Controllers\Users\DashboardController');
+
+        $today = date('Y-m-d');
+        $member_ids = RewardAchiever::where('weekly_salary', '>', 0)
+            ->distinct()
+            ->pluck('member_id');
+
+        foreach ($member_ids as $member_id) {
+            // Highest achieved reward only (reward_id desc matches reward level order).
+            $log = RewardAchiever::where('member_id', '=', $member_id)
+                ->where('weekly_salary', '>', 0)
+                ->orderBy('reward_id', 'desc')
+                ->first();
+
+            if ($log == null) {
+                continue;
+            }
+
+            // Skip if next payout date is still in the future (prevents duplicate weekly payments).
+            if ($log->return_date != null && $log->return_date > $today) {
+                continue;
+            }
+
+            $commission = $log->weekly_salary;
+            $description = 'Reward Weekly Salary #'.$log->reward_id;
+            $earning_type = 5;
+
+            $remain_commission = $dashboardCon->check3xEarningLimit($log->member_id, $commission);
+
+            if ($remain_commission > 0) {
+                $walletCon->addearningwalletlog($log->member_id, 1, $earning_type, $description, $remain_commission, 0, 0, date('Y-m-d H:i:s'));
+
+                $log->return_date = date('Y-m-d', strtotime($today.' + 7 days'));
+                $log->save();
+            } else {
+                $walletCon->addearningwalletlog($log->member_id, 3, $earning_type, $description, $commission, 0, 0, date('Y-m-d H:i:s'));
             }
         }
     }

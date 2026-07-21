@@ -85,6 +85,15 @@ class ProcessDaily extends Command
 		$rewardQualification->run();
 		Log::info('process reward qualification end...');
 
+		// Weekly Reward Salary - reuses SalaryController wallet pattern; Monday only (same gate as legacy salary earning).
+		if(date("D") == 'Mon')
+		{
+			$salaryCon = app('App\Http\Controllers\Users\SalaryController');
+			Log::info('process reward salary earning start...');
+			$salaryCon->runRewardSalaryEarning();
+			Log::info('process reward salary earning end...');
+		}
+
 		//
 		$rewardCon = app('App\Http\Controllers\Users\RewardController');
 		Log::info('process malaysia achiever start...');

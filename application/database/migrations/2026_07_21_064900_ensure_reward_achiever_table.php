@@ -27,6 +27,7 @@ return new class extends Migration
                 $table->decimal('leg3_business', 18, 2)->default(0);
                 $table->decimal('weekly_salary', 18, 2)->default(0);
                 $table->dateTime('achieve_date')->nullable();
+                $table->date('return_date')->nullable();
                 $table->timestamps();
 
                 $table->unique(['member_id', 'reward_id'], 'reward_achiever_member_reward_unique');
@@ -69,6 +70,9 @@ return new class extends Migration
             },
             'achieve_date' => function (Blueprint $table) {
                 $table->dateTime('achieve_date')->nullable();
+            },
+            'return_date' => function (Blueprint $table) {
+                $table->date('return_date')->nullable();
             },
         ];
 

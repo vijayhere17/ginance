@@ -54,7 +54,7 @@ return [
     'reward_qualification_leg3_percent' => 30,
 
     // Reward Qualification Engine - level => requirements
-    // weekly_salary is stored on achievement for future processing (no payout here)
+    // weekly_salary is paid weekly via SalaryController::runRewardSalaryEarning (Monday cron)
     'reward_qualification_levels' => [
         1 => [
             'direct' => 5,
@@ -128,5 +128,5 @@ return [
 
     // earning_type allocations used across the app (documentation only, not read programmatically)
     // 1 = Direct Sponsor Income, 2 = Daily ROI, 3 = Cashback, 4 = Level Income,
-    // 5 = Legacy Salary (dormant), 6 = DMC Leadership, 7 = Turnover Reward, 8 = Booster Income, 9 = Life Time Reward
+    // 5 = Salary / Reward Weekly Salary, 6 = DMC Leadership, 7 = Turnover Reward, 8 = Booster Income, 9 = Life Time Reward
 ];
