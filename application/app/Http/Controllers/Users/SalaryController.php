@@ -184,7 +184,7 @@ class SalaryController extends Controller
     /**
      * Weekly Reward Salary - reuses the same wallet / cap pattern as runSalaryEarning.
      * Pays reward_achiever.weekly_salary for the member's highest achieved reward only.
-     * Duplicate prevention via return_date (same field pattern as salary_achiever).
+     * Scheduler: pay when today >= return_date, then set return_date = today + 7 days.
      */
     public function runRewardSalaryEarning()
     {
@@ -207,14 +207,15 @@ class SalaryController extends Controller
                 continue;
             }
 
-            // Skip if next payout date is still in the future (prevents duplicate weekly payments).
+            // Pay only when due: today >= return_date (null treated as due).
             if ($log->return_date != null && $log->return_date > $today) {
                 continue;
             }
 
             $commission = $log->weekly_salary;
             $description = 'Reward Weekly Salary #'.$log->reward_id;
-            $earning_type = 5;
+            // earning_type 5 = Salary (legacy Potential Bonus / Salary Bonus). No dedicated Reward Salary type exists.
+            $earning_type = (int) config('income.reward_weekly_salary_earning_type', 5);
 
             $remain_commission = $dashboardCon->check3xEarningLimit($log->member_id, $commission);
 

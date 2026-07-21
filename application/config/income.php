@@ -54,7 +54,7 @@ return [
     'reward_qualification_leg3_percent' => 30,
 
     // Reward Qualification Engine - level => requirements
-    // weekly_salary is paid weekly via SalaryController::runRewardSalaryEarning (Monday cron)
+    // weekly_salary is paid via SalaryController::runRewardSalaryEarning when today >= return_date
     'reward_qualification_levels' => [
         1 => [
             'direct' => 5,
@@ -126,7 +126,19 @@ return [
     // Left in place, not deleted, per business decision to replace Salary with Turnover Reward income.
     'legacy_salary_enabled' => false,
 
+    // Wallet earning_type used by Weekly Reward Salary (default 5 = Salary / Salary Bonus).
+    // No dedicated Reward Salary type exists in the project; change here if a new type is approved.
+    'reward_weekly_salary_earning_type' => 5,
+
     // earning_type allocations used across the app (documentation only, not read programmatically)
-    // 1 = Direct Sponsor Income, 2 = Daily ROI, 3 = Cashback, 4 = Level Income,
-    // 5 = Salary / Reward Weekly Salary, 6 = DMC Leadership, 7 = Turnover Reward, 8 = Booster Income, 9 = Life Time Reward
+    // 0 = Withdrawal / admin credit-debit (non-income)
+    // 1 = Direct Sponsor Income
+    // 2 = Daily ROI
+    // 3 = Cashback
+    // 4 = Level Income (ROI on ROI) [also used historically by Binary matching]
+    // 5 = Salary / Potential Bonus (legacy) — also used for Reward Weekly Salary
+    // 6 = DMC Leadership
+    // 7 = Turnover Reward
+    // 8 = Booster Income
+    // 9 = Life Time Reward
 ];
