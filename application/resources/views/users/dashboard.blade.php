@@ -420,6 +420,10 @@
                                 <span class="text-muted">Turnover Bonus</span>
                                 <span>{{ $object->total_turnover_bonus }}</span>
                             </li>
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
+                                <span class="text-muted">Locked Reward Unlock</span>
+                                <span>{{ $object->total_locked_reward_unlock }}</span>
+                            </li>
                         </ul>
                     </div>
                 </div>

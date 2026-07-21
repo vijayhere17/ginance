@@ -210,6 +210,11 @@
 									<span class="title">Turnover Reward</span>
 								</a>
 							</li>
+							<li>
+								<a href="{{ URL::to('/') }}/admin/earning-report/{{ (int) config('income.locked_reward_earning_type', 10) }}/Locked Reward Unlock">
+									<span class="title">Locked Reward Unlock</span>
+								</a>
+							</li>
 						</ul> 
 					</li>
 

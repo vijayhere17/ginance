@@ -62,6 +62,10 @@ class DashboardController extends Controller
         $object->total_team_level_bonus = formatdecimal($balanceCon->getearningsum($user_id, 4), 4);
         $object->total_salary_bonus = formatdecimal($balanceCon->getearningsum($user_id, 5), 4);
         $object->total_turnover_bonus = formatdecimal($balanceCon->getearningsum($user_id, 6), 4);
+        $object->total_locked_reward_unlock = formatdecimal(
+            $balanceCon->getearningsum($user_id, (int) config('income.locked_reward_earning_type', 10)),
+            4
+        );
 
         // Locked Reward Bonus summary
         $user = Auth::user();
