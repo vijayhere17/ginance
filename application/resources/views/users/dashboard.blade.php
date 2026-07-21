@@ -67,46 +67,184 @@
     }
 
     .custom-alert {
-        background: linear-gradient(120deg, #9c7a22, #d4af37 55%, #f4d78a);
-        border-left: 6px solid #9c7a22;
-        border-radius: 12px;
-        padding: 20px 30px;
-        color: #0b0b0d;
+        background: linear-gradient(120deg, #a5731c, #e6ad1f 55%, #f8ce4e);
+        border-left: 4px solid #a5731c;
+        border-radius: 10px;
+        padding: 11px 16px;
+        color: #0d0b07;
         font-weight: 500;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(212, 175, 55, 0.15);
-        font-size: 14px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(230, 173, 31, 0.15);
+        font-size: 12.5px;
         max-width: 100%;
         width: 100%;
         position: relative;
+        margin-bottom: 20px;
     }
-    .custom-alert a { color: #0b0b0d !important; text-decoration: underline; }
+    .custom-alert a { color: #0d0b07 !important; text-decoration: underline; }
     .custom-alert strong { font-weight: 700; }
 
     .dash-coin-hero {
         width: 100%;
-        max-width: 260px;
+        max-width: 190px;
         aspect-ratio: 1;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        background: radial-gradient(circle at 35% 30%, #f4d78a, #d4af37 55%, #9c7a22 100%);
-        box-shadow: 0 0 60px rgba(212, 175, 55, 0.35), inset 0 0 30px rgba(0, 0, 0, 0.25);
+        background: radial-gradient(circle at 35% 30%, #2a2113, #0d0b07 75%);
+        border: 3px solid rgba(230, 173, 31, 0.55);
+        box-shadow: 0 0 60px rgba(230, 173, 31, 0.35), inset 0 0 30px rgba(0, 0, 0, 0.25);
     }
-    .dash-coin-hero svg { width: 45%; height: 45%; color: #0b0b0d; }
+    .dash-coin-hero svg { width: 45%; height: 45%; color: #e6ad1f; }
+    .dash-coin-hero img { width: 70%; height: auto; filter: drop-shadow(0 4px 14px rgba(230, 173, 31, 0.4)); }
 
-    .progress-thin { height: 8px; border-radius: 6px; background: rgba(255,255,255,0.06); }
+    .gt-hero-tagline {
+        font-size: 0.62rem;
+        text-transform: uppercase;
+        letter-spacing: 0.22em;
+        color: var(--gt-gold-2);
+        font-weight: 600;
+    }
+
+    .progress-thin { height: 8px; border-radius: 6px; background: rgba(255,255,255,0.12); }
 
     .rank-tier-pill {
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        padding: 4px 12px;
+        padding: 3px 10px;
         border-radius: 20px;
-        background: rgba(212, 175, 55, 0.14);
-        color: var(--gt-gold-2, #d4af37);
-        font-size: 0.75rem;
+        background: rgba(230, 173, 31, 0.14);
+        color: var(--gt-gold-2, #e6ad1f);
+        font-size: 0.7rem;
         font-weight: 600;
+    }
+
+    /* ==== Dashboard density & typography scale ==== */
+    .pc-content .card {
+        border-radius: 14px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .pc-content .card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(230, 173, 31, 0.14);
+    }
+    .pc-content .card .card-body { padding: 16px 18px; }
+    .pc-content .card .mb-3 { margin-bottom: 0.65rem !important; }
+
+    .pc-content h4, .pc-content .h4 { font-size: 1rem; font-weight: 700; }
+    .pc-content .card .btn { font-size: 0.78rem; padding: 8px 12px; }
+
+    .gt-card-title {
+        font-size: 0.7rem !important;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-weight: 700 !important;
+        color: var(--gt-gold-2) !important;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .gt-card-title::before {
+        content: "";
+        width: 3px;
+        height: 12px;
+        border-radius: 2px;
+        background: linear-gradient(180deg, #f8ce4e, #a5731c);
+        flex-shrink: 0;
+    }
+
+    .pc-content .list-group-item {
+        padding-top: 8px;
+        padding-bottom: 8px;
+        font-size: 0.8rem;
+    }
+    .pc-content .list-group-item > span:last-child,
+    .pc-content .list-group-item > div + span {
+        font-weight: 600;
+        max-width: 60%;
+        text-align: right;
+        word-break: break-word;
+    }
+    .pc-content .list-group-item .text-muted { font-size: 0.72rem; }
+
+    .pc-content .bg-body.rounded {
+        padding: 12px !important;
+        border: 1px solid var(--gt-border);
+    }
+    .pc-content .bg-body.rounded h4 { font-size: 0.95rem; margin-bottom: 2px; word-break: break-all; }
+    .pc-content .bg-body.rounded p {
+        font-size: 0.62rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-weight: 600;
+    }
+
+    .gt-mini-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+    }
+    .gt-mini-stat {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--gt-border);
+        border-radius: 10px;
+        padding: 10px 6px;
+        text-align: center;
+        min-width: 0;
+    }
+    .gt-mini-stat .v {
+        display: block;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--gt-heading);
+        word-break: break-all;
+        line-height: 1.2;
+    }
+    .gt-mini-stat .l {
+        display: block;
+        margin-top: 2px;
+        font-size: 0.6rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--gt-text-muted);
+    }
+
+    .gt-empty {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 26px 10px;
+        color: var(--gt-text-muted);
+        font-size: 0.78rem;
+    }
+    .gt-empty i {
+        font-size: 1.7rem;
+        color: var(--gt-gold-3);
+        opacity: 0.9;
+    }
+    
+    ::-webkit-scrollbar {
+        display: none;
+    }
+    
+    /* Firefox */
+    html {
+        scrollbar-width: none;
+    }
+    
+    /* IE & Old Edge */
+    body {
+        -ms-overflow-style: none;
+    }
+    
+    /* Ensure scrolling is enabled */
+    html,
+    body {
+        overflow-y: auto;
+        overflow-x: hidden; /* optional */
     }
 </style>
 @endsection
@@ -119,7 +257,6 @@
                 <div class="custom-alert">
                     <strong>Refer Link :.</strong> Use your referral link to spread the good vibes and earn some perks too! Let's build something amazing together!&nbsp;&nbsp;<a href="javascript:toClip(`{{ URL::to('/') }}/sign-up?ref={{ Auth::user()->username }}`)">Copy Link...</a>
                 </div>
-                <br>
             </div>
         </div>
 
@@ -133,7 +270,7 @@
                                 <img src="{{ URL::to('/') }}/assets/images/user/avatar-1.jpg" alt="user" class="user-avtar wid-50 rounded-circle" />
                             </div>
                             <div class="flex-grow-1 ms-3">
-                                <h5 class="mb-0">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</h5>
+                                <h5 class="mb-0">Wallet Address</h5>
                                 <p class="text-muted mb-0">{{ obscureAddress(Auth::user()->username) }}</p>
                             </div>
                         </div>
@@ -141,6 +278,18 @@
                             <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
                                 <span class="text-muted">Email</span>
                                 <span>{{ Auth::user()->email ?? '-' }}</span>
+                            </li>
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
+                                <span class="text-muted">Account Status</span>
+                                @if(Auth::user()->kit)
+                                    <span class="badge bg-light-success">Active</span>
+                                @else
+                                    <span class="badge bg-light-warning">Inactive</span>
+                                @endif
+                            </li>
+                            <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
+                                <span class="text-muted">Member Since</span>
+                                <span>{{ date('d M Y', strtotime(Auth::user()->created_at)) }}</span>
                             </li>
                             <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
                                 <span class="text-muted">Current Rank</span>
@@ -159,61 +308,34 @@
                 <div class="card h-100">
                     <div class="card-body">
                         <div class="d-flex align-items-center justify-content-between mb-3">
-                            <h5 class="mb-0">Package Details</h5>
+                            <h5 class="mb-0 gt-card-title">Package Details</h5>
                         </div>
                         @if(Auth::user()->kit)
-                            <ul class="list-group list-group-flush">
+                            <ul class="list-group list-group-flush" style="height: 185px; overflow: scroll;">
+                                @foreach($object->list_self_investment as $lpd)
                                 <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
-                                    <span class="text-muted">Package</span>
-                                    <span>{{ Auth::user()->kit->name }}</span>
+                                    <span class="text-muted">
+                                        {{ $lpd->kit->name ?? 'Package' }}<br>
+                                        <small>{{ date("d-m-Y H:i:s", strtotime($lpd->created_at)) }}</small>
+                                    </span>
+                                    <span>${{ $lpd->paid_amount }}</span>
                                 </li>
-                                <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
-                                    <span class="text-muted">Invested Amount</span>
-                                    <span>{{ Auth::user()->kit->amount }}</span>
-                                </li>
-                                <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
-                                    <span class="text-muted">Daily ROI</span>
-                                    <span>{{ Auth::user()->kit->percantage }}%</span>
-                                </li>
+                                @endforeach
                             </ul>
                         @else
-                            <p class="text-muted mb-0">No active package yet.</p>
-                            <div class="d-grid mt-3">
-                                <a href="{{ URL::to('/') }}/buy-robo" class="btn btn-primary btn-sm">Stake Now</a>
+                            <div class="gt-empty">
+                                <i class="ti ti-package"></i>
+                                <span>No active package yet.</span>
+                            </div>
+                            <div class="d-grid">
+                                <a href="{{ URL::to('/') }}/buy-robo" class="btn btn-primary btn-sm">Topup Now</a>
                             </div>
                         @endif
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-12 col-xxl-4 mb-4">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center justify-content-between mb-3">
-                            <h5 class="mb-0">Quick Actions</h5>
-                        </div>
-                        <div class="row g-2">
-                            <div class="col-6">
-                                <a href="{{ URL::to('/') }}/buy-robo" class="btn btn-primary w-100"><svg class="pc-icon me-1" style="width:16px;height:16px;"><use xlink:href="#custom-cpu-charge"></use></svg> Stake Now</a>
-                            </div>
-                            <div class="col-6">
-                                <a href="{{ URL::to('/') }}/new-withdrawal" class="btn btn-light-primary w-100"><i class="ti ti-wallet me-1"></i> Withdraw</a>
-                            </div>
-                            <div class="col-6">
-                                <a href="javascript:toClip(`{{ URL::to('/') }}/sign-up?ref={{ Auth::user()->username }}`)" class="btn btn-light-primary w-100"><i class="ti ti-link me-1"></i> Copy Referral Link</a>
-                            </div>
-                            <div class="col-6">
-                                <a href="{{ URL::to('/') }}/create-ticket" class="btn btn-light-primary w-100"><i class="ti ti-headset me-1"></i> Support</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- [ Wallet / Income / Team stats ] -->
-        <div class="row">
-            <div class="col-md-6 col-xxl-3 mb-4">
+            
+            <div class="col-md-6 col-xxl-4 mb-4">
                 <div class="card h-100">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
@@ -221,18 +343,36 @@
                                 <svg class="pc-icon"><use xlink:href="#custom-wallet-2"></use></svg>
                             </div>
                             <div class="flex-grow-1 ms-3">
-                                <h6 class="mb-0">Wallet Balance</h6>
+                                <h6 class="mb-0 gt-card-title">Wallet Balance</h6>
                             </div>
                         </div>
                         <div class="bg-body p-3 mt-3 rounded">
                             <div class="row align-items-center">
                                 <div class="col-6">
-                                    <h4 class="mb-0">{{ $object->total_balance }}</h4>
-                                    <p class="text-primary mb-0">Earning Wallet</p>
+                                    <h4 class="mb-0">Earning Wallet</h4>
                                 </div>
                                 <div class="col-6 text-end">
-                                    <h4 class="mb-0">{{ $object->total_pw_balance }}</h4>
-                                    <p class="text-primary mb-0">Potential Wallet</p>
+                                    <h4 class="mb-0 text-primary">{{ $object->total_balance }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-body p-3 mt-2 rounded">    
+                            <div class="row align-items-center">
+                                <div class="col-6">
+                                    <h4 class="mb-0">Total Income</h4>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <h4 class="mb-0 text-primary">{{ $object->total_earning }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-body p-3 mt-2 rounded">       
+                            <div class="row align-items-center">
+                                <div class="col-6">
+                                    <h4 class="mb-0">Remaining Income</h4>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <h4 class="mb-0 text-primary">{{ $object->total_2x_remain }}</h4>
                                 </div>
                             </div>
                         </div>
@@ -240,34 +380,59 @@
                 </div>
             </div>
 
-            <div class="col-md-6 col-xxl-3 mb-4">
+        </div>
+
+        <!-- [ Wallet / Income / Team stats ] -->
+        <div class="row">
+            
+            <div class="col-md-12 col-xxl-4 mb-4">
                 <div class="card h-100">
                     <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div class="avtar avtar-s bg-light-success">
-                                <svg class="pc-icon"><use xlink:href="#custom-dollar-square"></use></svg>
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                                <h6 class="mb-0">Income</h6>
-                            </div>
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <h5 class="mb-0 gt-card-title">Booster Timer Status</h5>
                         </div>
-                        <div class="bg-body p-3 mt-3 rounded">
-                            <div class="row align-items-center">
-                                <div class="col-6">
-                                    <h4 class="mb-0">{{ $object->total_earning }}</h4>
-                                    <p class="text-primary mb-0">Total Income</p>
-                                </div>
-                                <div class="col-6 text-end">
-                                    <h4 class="mb-0">{{ $object->total_income_today }}</h4>
-                                    <p class="text-primary mb-0">Today's Income</p>
-                                </div>
+                        <div class="row g-2">
+                            <div class="col-12">
+                                @if(Auth::user()->kit_id > 0)
+                                    @if(Auth::user()->is_booster == 0) 
+                                        <div class="col-md-12 col-xxl-12 mt-3">
+                                            <div class="alert alert-primary d-flex align-items-center" role="alert">
+                                                <svg class="bi flex-shrink-0 me-2" width="24" height="24">
+                                                    <use xlink:href="#custom-calendar-1"></use>
+                                                </svg>
+                                                <div style="font-size: 18px;">
+                                                    <span id="booster_timer" style="font-weight: 900;">0 Days 00:00:00</span>
+                                                </div>
+                                            </div>
+                                        </div>  
+                                    @else    
+                                        <div class="col-md-12 col-xxl-12 mt-3">
+                                            <div class="alert alert-error d-flex align-items-center" role="alert">
+                                                <svg class="bi flex-shrink-0 me-2" width="24" height="24">
+                                                    <use xlink:href="#custom-star-bold"></use>
+                                                </svg>
+                                                <div style="font-size: 18px;">Congratulations! You will achieve Booster</div>
+                                            </div>
+                                        </div>    
+                                    @endif
+                                @else     
+                                    <div class="col-md-12 col-xxl-12 mt-3">
+                                        <div class="alert alert-primary d-flex align-items-center" role="alert">
+                                            <svg class="bi flex-shrink-0 me-2" width="24" height="24">
+                                                <use xlink:href="#custom-star-bold"></use>
+                                            </svg>
+                                            <div style="font-size: 18px;">Please Active Your ID.</div>
+                                        </div>
+                                    </div>  
+                                @endif  
+                                
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-6 col-xxl-3 mb-4">
+            
+            <div class="col-md-6 col-xxl-4 mb-4">
                 <div class="card h-100">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
@@ -275,7 +440,7 @@
                                 <svg class="pc-icon"><use xlink:href="#custom-profile-2user-outline"></use></svg>
                             </div>
                             <div class="flex-grow-1 ms-3">
-                                <h6 class="mb-0">Direct Team</h6>
+                                <h6 class="mb-0 gt-card-title">Direct Team</h6>
                             </div>
                         </div>
                         <div class="bg-body p-3 mt-3 rounded">
@@ -297,8 +462,8 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-6 col-xxl-3 mb-4">
+            
+            <div class="col-md-6 col-xxl-4 mb-4">
                 <div class="card h-100">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
@@ -306,7 +471,7 @@
                                 <svg class="pc-icon"><use xlink:href="#custom-profile-2user-outline"></use></svg>
                             </div>
                             <div class="flex-grow-1 ms-3">
-                                <h6 class="mb-0">Total Team</h6>
+                                <h6 class="mb-0 gt-card-title">Total Team</h6>
                             </div>
                         </div>
                         <div class="bg-body p-3 mt-3 rounded">
@@ -328,6 +493,75 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-6 col-xxl-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                                <div class="avtar avtar-s bg-light-primary">
+                                    <span class="pc-micon">
+                                        <svg class="pc-icon">
+                                            <use xlink:href="#custom-dollar-square"></use>
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="mb-0">My Business</h6>
+                            </div>
+                        </div>
+                        <div class="bg-body p-3 mt-3 rounded">
+                            <div class="mt-3 row align-items-center">
+                                <div class="col-12 text-end">
+                                    <h3 class="mb-1">${{ $object->total_t_investment }}</h3>
+                                    <p class="text-primary mb-0">Total Downline</p>
+                                </div>
+                            </div>
+                            <div class="mt-3 row align-items-center">
+                                <div class="col-6">
+                                    <h3 class="mb-1">${{ $object->total_r_investment }}</h3>
+                                    <p class="text-primary mb-0">Total Referral</p>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <h3 class="mb-1">${{ $object->total_t_investment }}</h3>
+                                    <p class="text-primary mb-0">Total Business</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="card bg-grey available-balance-card" style="background-color: rgb(22 166 181) !important;">
+                    <div class="card-body p-3">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                                <p class="mb-0 text-white text-opacity-75">Coin Price</p>
+                                <h4 class="mb-0 text-white">${{ getcoinrate() }}</h4>
+                            </div>
+                            <div class="avtar">
+                                <img src="{{ URL::to('/') }}/assets/images/logo-lg.png" alt="user-image" class="user-avtar wid-35" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="card bg-primary available-balance-card">
+                    <div class="card-body p-3">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                                <p class="mb-0 text-white text-opacity-75">Total Withdrawal</p>
+                                <h4 class="mb-0 text-white">{{ $object->total_withdrawal }}</h4>
+                            </div>
+                            <div class="avtar">
+                                <i class="ti ti-arrows-left-right f-18"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>    
         </div>
 
         <!-- [ Locked Reward Bonus ] -->
@@ -340,7 +574,7 @@
                                 <svg class="pc-icon"><use xlink:href="#custom-dollar-square"></use></svg>
                             </div>
                             <div class="flex-grow-1 ms-3">
-                                <h6 class="mb-0">Locked Reward Bonus</h6>
+                                <h6 class="mb-0 gt-card-title">Locked Reward Bonus</h6>
                             </div>
                         </div>
                         <div class="bg-body p-3 mt-3 rounded">
@@ -366,7 +600,7 @@
                                 <svg class="pc-icon"><use xlink:href="#custom-wallet-2"></use></svg>
                             </div>
                             <div class="flex-grow-1 ms-3">
-                                <h6 class="mb-0">Unlocked Reward Bonus</h6>
+                                <h6 class="mb-0 gt-card-title">Unlocked Reward Bonus</h6>
                             </div>
                         </div>
                         <div class="bg-body p-3 mt-3 rounded">
@@ -377,7 +611,7 @@
                                     ? min(100, round(((float)$object->unlocked_reward_bonus / (float)$object->locked_reward_total) * 100, 1))
                                     : 0;
                             @endphp
-                            <div class="progress mb-2" style="height: 8px;">
+                            <div class="progress mb-2 progress-thin">
                                 <div class="progress-bar bg-success" role="progressbar" style="width: {{ $gt_unlock_pct }}%;" aria-valuenow="{{ $gt_unlock_pct }}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                             <p class="mb-0 text-primary">Unlocked {{ $object->unlocked_reward_bonus }} / {{ $object->locked_reward_total }}</p>
@@ -386,229 +620,144 @@
                 </div>
             </div>
         </div>
-
-        <!-- [ Bonus Summary / Achievement Progress / Rank Progress ] -->
+        
         <div class="row">
-            <div class="col-md-6 col-xxl-4 mb-4">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center justify-content-between mb-3">
-                            <h5 class="mb-0">Bonus Summary</h5>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
-                                <span class="text-muted">Direct Sponsor Income</span>
-                                <span>{{ $object->total_referral_bonus }}</span>
-                            </li>
-                            <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
-                                <span class="text-muted">Daily ROI Income</span>
-                                <span>{{ $object->total_daily_roi_bonus }}</span>
-                            </li>
-                            <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
-                                <span class="text-muted">Daily Level Income</span>
-                                <span>{{ $object->total_daily_level_bonus }}</span>
-                            </li>
-                            <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
-                                <span class="text-muted">Team Level Income</span>
-                                <span>{{ $object->total_team_level_bonus }}</span>
-                            </li>
-                            <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
-                                <span class="text-muted">Salary Bonus</span>
-                                <span>{{ $object->total_salary_bonus }}</span>
-                            </li>
-                            <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
-                                <span class="text-muted">Turnover Bonus</span>
-                                <span>{{ $object->total_turnover_bonus }}</span>
-                            </li>
-                            <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
-                                <span class="text-muted">Locked Reward Unlock</span>
-                                <span>{{ $object->total_locked_reward_unlock }}</span>
-                            </li>
-                        </ul>
+            <!-- [ form-element ] start -->
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Reward Achievement</h5>
                     </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-xxl-4 mb-4">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center justify-content-between mb-3">
-                            <h5 class="mb-0">Achievement Progress</h5>
-                        </div>
-                        @php
-                            $gt_effective_cap = $object->total_earning + $object->total_3x_remain;
-                            $gt_used_pct = $gt_effective_cap > 0 ? min(100, round(($object->total_earning / $gt_effective_cap) * 100, 1)) : 0;
-                        @endphp
-                        <p class="text-muted mb-1">Earning Cap Usage</p>
-                        <div class="progress progress-thin mb-2">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: {{ $gt_used_pct }}%"></div>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <span class="text-muted f-12">{{ $object->total_earning }} earned</span>
-                            <span class="text-muted f-12">{{ $gt_used_pct }}% used</span>
-                        </div>
-                        <hr>
-                        <div class="d-flex justify-content-between">
-                            <span class="text-muted">Remaining Headroom</span>
-                            <span>{{ $object->total_3x_remain }}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-12 col-xxl-4 mb-4">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center justify-content-between mb-3">
-                            <h5 class="mb-0">Rank Progress</h5>
-                        </div>
-                        @php
-                            $gt_next_rank = null;
-                            if($object->current_rank && $object->allsalary) {
-                                $gt_found_current = false;
-                                foreach($object->allsalary as $gt_tier) {
-                                    if($gt_found_current) { $gt_next_rank = $gt_tier; break; }
-                                    if($gt_tier->id == $object->current_rank->id) { $gt_found_current = true; }
-                                }
-                            } elseif(!$object->current_rank && $object->allsalary && count($object->allsalary) > 0) {
-                                $gt_next_rank = $object->allsalary[0];
-                            }
-                            $gt_team_business = Auth::user()->team_investment ?? 0;
-                            $gt_rank_pct = ($gt_next_rank && $gt_next_rank->business > 0) ? min(100, round(($gt_team_business / $gt_next_rank->business) * 100, 1)) : 0;
-                        @endphp
-                        <p class="text-muted mb-1">Current: {{ $object->current_rank->rank ?? 'Not Ranked Yet' }}</p>
-                        @if($gt_next_rank)
-                            <div class="progress progress-thin mb-2">
-                                <div class="progress-bar bg-primary" role="progressbar" style="width: {{ $gt_rank_pct }}%"></div>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <span class="text-muted f-12">Next: {{ $gt_next_rank->rank }}</span>
-                                <span class="text-muted f-12">{{ $gt_rank_pct }}%</span>
-                            </div>
-                        @else
-                            <p class="text-muted mb-0">Highest rank achieved.</p>
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- [ Recent Income / Recent Platform Activity ] -->
-        <div class="row">
-            <div class="col-md-6 mb-4">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center justify-content-between mb-3">
-                            <h5 class="mb-0">Recent Income</h5>
-                            <a href="{{ URL::to('/') }}/earning-wallet" class="link-primary f-12">View All</a>
-                        </div>
-                        @if($object->recent_earning && count($object->recent_earning) > 0)
-                            <ul class="list-group list-group-flush">
-                                @foreach($object->recent_earning as $log)
-                                <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <span class="d-block">{{ $log->description }}</span>
-                                        <span class="text-muted f-12">{{ date('d M Y, H:i', strtotime($log->created_at)) }}</span>
+                    <div class="card-body table-border-style">
+                        <div class="row g-3 mt-0">
+                            <div class="col-sm-4">
+                                <div class="bg-body p-3 rounded">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="flex-shrink-0">
+                                            <span class="p-1 d-block bg-primary rounded-circle">
+                                                <span class="visually-hidden">Power Leg (40%)</span>
+                                            </span>
+                                        </div>
+                                        <div class="flex-grow-1 ms-2">
+                                            <p class="mb-0">Power Leg (40%)</p>
+                                        </div>
                                     </div>
-                                    <span class="text-success">+{{ $log->amount }}</span>
-                                </li>
-                                @endforeach
-                            </ul>
-                        @else
-                            <p class="text-muted mb-0">No income yet.</p>
-                        @endif
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 mb-4">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center justify-content-between mb-3">
-                            <h5 class="mb-0">Recent Platform Activations</h5>
-                        </div>
-                        @if($object->recent_staking && count($object->recent_staking) > 0)
-                            <ul class="list-group list-group-flush">
-                                @foreach($object->recent_staking as $stake)
-                                <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <span class="d-block">{{ $stake->member ? obscureAddress($stake->member->username) : 'Member' }}</span>
-                                        <span class="text-muted f-12">{{ date('d M Y, H:i', strtotime($stake->created_at)) }}</span>
+                                    <h6 class="mb-0">$ {{ $object->leg_data['leg_1_business'] }} <small class="text-muted">{{ $object->leg_data['leg_1_username'] }}</small></h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="bg-body p-3 rounded">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="flex-shrink-0">
+                                            <span class="p-1 d-block bg-warning rounded-circle">
+                                                <span class="visually-hidden">Power Leg (30%)</span>
+                                            </span>
+                                        </div>
+                                        <div class="flex-grow-1 ms-2">
+                                            <p class="mb-0">Power Leg (30%)</p>
+                                        </div>
                                     </div>
-                                    <span class="text-primary">{{ $stake->amount }}</span>
-                                </li>
-                                @endforeach
-                            </ul>
-                        @else
-                            <p class="text-muted mb-0">No recent activations.</p>
-                        @endif
+                                    <h6 class="mb-0">$ {{ $object->leg_data['leg_2_business'] }} <small class="text-muted">{{ $object->leg_data['leg_2_username'] }}</small>
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="bg-body p-3 rounded">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="flex-shrink-0">
+                                            <span class="p-1 d-block bg-success rounded-circle">
+                                                <span class="visually-hidden">Power Leg (30%)</span>
+                                            </span>
+                                        </div>
+                                        <div class="flex-grow-1 ms-2">
+                                            <p class="mb-0">Power Leg (30%)</p>
+                                        </div>
+                                    </div>
+                                    <h6 class="mb-0">$ {{ $object->leg_data['leg_3_business'] }} <small class="text-muted">{{ $object->leg_data['leg_3_username'] }}</small>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="table-responsive mt-4">
+                            <table class="table" id="tableList">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Rank</th>
+                                        <th>Business</th>
+                                        <th>Instant Reward</th>
+                                        <th>Status</th>
+                                        <th>Achieve Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($object->allsalary as $rank)
+                                    
+                                    @php
+                                        $salaryCon = app('App\Http\Controllers\Users\SalaryController');
+                                        $status = $salaryCon->getstatus(Auth::user()->id, $rank->id);
+                                    @endphp
+                                    <tr>
+                                        <td>{{ $rank->id }}</td>
+                                        <td>{{ $rank->rank }}</td>
+                                        <td>${{ $rank->business }}</td>
+                                        <td>${{ $rank->bonus }}</td>
+                                        <td>
+                                            @if($status == null)
+                                                <span class="badge bg-warning">Pending</span>
+                                            @else
+                                                <span class="badge bg-success">Achieve</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($status == null)
+                                                --/--/---- --:--:--
+                                            @else
+                                                {{ date("d/m/Y H:i:s", strtotime($status->created_at)) }}
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </div> 
         </div>
 
-        <!-- [ Coin price + earnings summary ] -->
-        <div class="row">
-            <div class="col-md-6 col-xxl-4 mb-4" align="center">
-                <div class="dash-coin-hero mx-auto">
-                    <svg class="pc-icon"><use xlink:href="#custom-dollar-square"></use></svg>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-xxl-4 mb-4">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center justify-content-between mb-3">
-                            <h5 class="mb-0">Stake's Details</h5>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
-                                <span class="text-muted">Total Stake's</span>
-                                <span>{{ $object->total_self_investment }}</span>
-                            </li>
-                            <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
-                                <span class="text-muted">Total Withdraw</span>
-                                <span>{{ $object->total_withdrawal }}</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-12 col-xxl-4 mb-4">
-                <div class="card card-gold h-100">
-                    <div class="card-body p-3">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <div>
-                                <p class="mb-0 text-opacity-75" style="color:#0b0b0d;">Coin Price</p>
-                                <h4 class="mb-0" style="color:#0b0b0d;">${{ getcoinrate() }}</h4>
-                            </div>
-                            <div class="avtar">
-                                <svg class="pc-icon" style="color:#0b0b0d;"><use xlink:href="#custom-status-up"></use></svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card bg-primary available-balance-card mt-3">
-                    <div class="card-body p-3">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <div>
-                                <p class="mb-0 text-white text-opacity-75">Total Referral's Earning</p>
-                                <h4 class="mb-0 text-white">{{ $object->total_withdrawal }}</h4>
-                            </div>
-                            <div class="avtar">
-                                <i class="ti ti-arrows-left-right f-18"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 @endsection
 @section('jscontent')
+
+@if(Auth::user()->kit_id > 0)
+    @if(Auth::user()->is_booster == 0) 
+        <script>
+            var countDownDate = new Date("<?php echo date('M d, Y H:i:s', strtotime(Auth::user()->activation_date. ' + 48 hours')); ?>").getTime();
+           
+            var x = setInterval(function() {
+                var now = new Date().getTime();
+                
+                var distance = countDownDate - now;
+
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("booster_timer").innerHTML = days+' Days '+hours+ ":"+minutes+":"+seconds;
+
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById("booster_timer").innerHTML = "Expired";
+                }
+            }, 1000);
+        </script>
+    @endif  
+@endif 
+
 <script>
     function toClip(text) {
         var copy = document.createElement("textarea");
