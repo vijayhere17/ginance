@@ -80,6 +80,17 @@ class ProcessDaily extends Command
 		$turnoverCon->runTurnoverAchiever();
 		Log::info('process turnover reward achiever end...');
 
+		$rewardQualification = app('App\Services\RewardQualificationService');
+		Log::info('process reward qualification start...');
+		$rewardQualification->run();
+		Log::info('process reward qualification end...');
+
+		// Weekly Reward Salary - scheduled by reward_achiever.return_date (every 7 days from qualification).
+		$salaryCon = app('App\Http\Controllers\Users\SalaryController');
+		Log::info('process reward salary earning start...');
+		$salaryCon->runRewardSalaryEarning();
+		Log::info('process reward salary earning end...');
+
 		//
 		$rewardCon = app('App\Http\Controllers\Users\RewardController');
 		Log::info('process malaysia achiever start...');

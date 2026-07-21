@@ -16,11 +16,11 @@ use App\Models\BinaryPoints;
 use App\Models\UserStaked;
 
 use App\Models\RewardMaster;
-use App\Models\RewardAchiever
-;
+use App\Models\RewardAchiever;
 use App\Models\MalaysiaAchiever;
 use App\Models\BakuAchiever;
 use App\Models\SalaryAchiever;
+use App\Services\RewardQualificationService;
 
 use Log;
 use DB;
@@ -30,13 +30,21 @@ class RewardController extends Controller
 {
     public function indexachievers()
     {
-        $page_titel = 'Reward Master';    
-        
-        $allrewards = RewardMaster::get();
+        $page_titel = 'Reward Achievement';
 
+        $allrewards = RewardMaster::orderBy('id', 'asc')->get();
         $user_id = Auth::user()->id;
-                           
-        return view('users.reward-master')->with(['page_titel'=>$page_titel, 'allrewards'=>$allrewards, 'user_id'=>$user_id])->toJS();
+
+        $progress = app(RewardQualificationService::class)->getMemberProgress($user_id);
+        $achievements = RewardAchiever::where('member_id', '=', $user_id)->get()->keyBy('reward_id');
+
+        return view('users.reward-master')->with([
+            'page_titel' => $page_titel,
+            'allrewards' => $allrewards,
+            'user_id' => $user_id,
+            'progress' => $progress,
+            'achievements' => $achievements,
+        ])->toJS();
     }
     
     public function getstatus($member_id, $reward_id)
