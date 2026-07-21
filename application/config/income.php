@@ -48,6 +48,65 @@ return [
     'reward_leg2_percent' => 40,
     'reward_leg3_percent' => 20,
 
+    // Reward Qualification Engine - top-3 direct leg split (40:30:30)
+    'reward_qualification_leg1_percent' => 40,
+    'reward_qualification_leg2_percent' => 30,
+    'reward_qualification_leg3_percent' => 30,
+
+    // Reward Qualification Engine - level => requirements
+    // weekly_salary is stored on achievement for future processing (no payout here)
+    'reward_qualification_levels' => [
+        1 => [
+            'direct' => 5,
+            'team_members' => 20,
+            'self_business' => 100,
+            'team_business' => 5000,
+            'weekly_salary' => 10,
+        ],
+        2 => [
+            'direct' => 6,
+            'team_members' => 50,
+            'self_business' => 200,
+            'team_business' => 12000,
+            'weekly_salary' => 20,
+        ],
+        3 => [
+            'direct' => 7,
+            'team_members' => 100,
+            'self_business' => 300,
+            'team_business' => 20000,
+            'weekly_salary' => 50,
+        ],
+        4 => [
+            'direct' => 8,
+            'team_members' => 200,
+            'self_business' => 500,
+            'team_business' => 50000,
+            'weekly_salary' => 100,
+        ],
+        5 => [
+            'direct' => 9,
+            'team_members' => 500,
+            'self_business' => 700,
+            'team_business' => 100000,
+            'weekly_salary' => 200,
+        ],
+        6 => [
+            'direct' => 10,
+            'team_members' => 1000,
+            'self_business' => 1000,
+            'team_business' => 250000,
+            'weekly_salary' => 300,
+        ],
+        7 => [
+            'direct' => 14,
+            'team_members' => 2000,
+            'self_business' => 1500,
+            'team_business' => 500000,
+            'weekly_salary' => 500,
+        ],
+    ],
+
     // Earning cap multipliers
     'working_cap_multiplier' => 3,
     'non_working_cap_multiplier' => 2,
