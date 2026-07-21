@@ -89,5 +89,10 @@ class ProcessDaily extends Command
 		Log::info('process baku achiever start...');
        	$rewardCon->runBakuAchiever();
 		Log::info('process baku achiever end...');
+
+		$lockedReward = app('App\Services\LockedRewardBonusService');
+		Log::info('process locked reward expiry start...');
+		$lockedReward->runExpiry();
+		Log::info('process locked reward expiry end...');
     }
 }
